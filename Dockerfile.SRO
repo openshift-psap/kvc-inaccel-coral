@@ -8,7 +8,7 @@ ARG AWS=xrt_202010.2.6.0_8.3.2011-x86_64-aws.rpm
 
 RUN dnf install kernel-devel
 
-RUN subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
+RUN dnf config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms
 
 RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
