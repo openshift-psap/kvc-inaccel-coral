@@ -7,12 +7,16 @@ ARG AWS=xrt_202010.2.6.0_8.3.2011-x86_64-aws.rpm
 
 RUN sleep 100
 
-RUN ls -l /run/secrets/rhsm/* || true
-RUN ls -l /run/secrets/etc-pki-entitlement/*  || true
+RUN ls -l /run/secrets/rhsm/ || true
+RUN ls -l /run/secrets/etc-pki-entitlement/  || true
 
 
-RUN ls -l /etc/pki/entitlement-host/* || true
-RUN ls -l /etc/rhsm-host/* || true
+RUN ls -l /etc/pki/entitlement-host/ || true
+RUN ls -l /etc/rhsm-host/ || true
+
+RUN ls -l /etc/pki/entitlement/ || true
+RUN ls -l /etc/rhsm/ || true
+
 
 RUN sleep infinity 
 
