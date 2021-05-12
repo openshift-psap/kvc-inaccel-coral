@@ -4,6 +4,9 @@ ARG REPO=https://inaccel-amazon.s3.amazonaws.com/rhel
 ARG XRT=xrt_202010.2.6.0_8.3.2011-x86_64-xrt.rpm 
 ARG AWS=xrt_202010.2.6.0_8.3.2011-x86_64-aws.rpm
 
+
+RUN sleep 100
+
 RUN ls -l /run/secrets/rhsm/* || true
 RUN ls -l /run/secrets/etc-pki-entitlement/*  || true
 
