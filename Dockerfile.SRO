@@ -7,7 +7,7 @@ ARG AWS=xrt_202010.2.6.0_8.3.2011-x86_64-aws.rpm
 RUN ls -l /run/secrets/rhsm/*
 RUN ls -l /run/secrets/*/*
 
-RUN ls -l /etc/pki/entitlement-host/*
+RUN ls -l /etc/pki/entitlement*/*
 RUN ls -l /etc/rhsm-host/*
 
 RUN dnf repolist --disablerepo=*
