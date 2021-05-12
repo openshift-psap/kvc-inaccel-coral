@@ -4,6 +4,9 @@ ARG REPO=https://inaccel-amazon.s3.amazonaws.com/rhel
 ARG XRT=xrt_202010.2.6.0_8.3.2011-x86_64-xrt.rpm 
 ARG AWS=xrt_202010.2.6.0_8.3.2011-x86_64-aws.rpm
 
+RUN ls -l /etc/pki/*
+RUN ls -l /etc/rhsm*
+
 RUN dnf repolist --disablerepo=*
 RUN cat /etc/yum.repos.d/redhat.repo
 
