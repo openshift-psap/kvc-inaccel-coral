@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/ubi
+FROM registry.access.redhat.com/ubi8:latest
 
 ARG REPO=https://inaccel-amazon.s3.amazonaws.com/rhel
 ARG XRT=xrt_202010.2.6.0_8.3.2011-x86_64-xrt.rpm 
@@ -7,6 +7,8 @@ ARG AWS=xrt_202010.2.6.0_8.3.2011-x86_64-aws.rpm
 #RUN dnf upgrade driver-container-base is the latest
 
 RUN dnf install kernel-devel
+
+RUN sleep infinity
 
 RUN dnf config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms
 
