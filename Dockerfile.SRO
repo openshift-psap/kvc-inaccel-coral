@@ -7,6 +7,8 @@ ARG AWS=xrt_202010.2.6.0_8.3.2011-x86_64-aws.rpm
 # Populate the redhat.repo file so we can enable repos
 RUN dnf makecache 
 
+RUN sleep infinity
+
 RUN dnf config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms
 
 RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
