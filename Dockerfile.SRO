@@ -1,24 +1,9 @@
-FROM registry.access.redhat.com/ubi8:latest
+FROM quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:e55e71960269793c1ff70b8934048bfb756ec93ce57f4268c749ab3b39c26cb3
 
 ARG REPO=https://inaccel-amazon.s3.amazonaws.com/rhel
 ARG XRT=xrt_202010.2.6.0_8.3.2011-x86_64-xrt.rpm 
 ARG AWS=xrt_202010.2.6.0_8.3.2011-x86_64-aws.rpm
 
-
-RUN sleep 100
-
-RUN ls -l /run/secrets/rhsm/ || true
-RUN ls -l /run/secrets/etc-pki-entitlement/  || true
-
-
-RUN ls -l /etc/pki/entitlement-host/ || true
-RUN ls -l /etc/rhsm-host/ || true
-
-RUN ls -l /etc/pki/entitlement/ || true
-RUN ls -l /etc/rhsm/ || true
-
-
-RUN sleep infinity 
 
 RUN dnf repolist --disablerepo=*
 RUN cat /etc/yum.repos.d/redhat.repo
