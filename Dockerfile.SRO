@@ -11,17 +11,16 @@ RUN dnf repolist
 
 RUN dnf -v update --allowerasing --skip-broken -y
 
+
+RUN cp /etc/yum/vars/releasever /etc/yum/vars/releasever.bak
+RUN echo 8 > /etc/yum/vars/releasever
 RUN dnf -v  -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
 RUN sed -i 's/$releasever/8/g'      /etc/yum.repos.d/epel-*
 RUN sed -i 's/#baseurl/baseurl/g'   /etc/yum.repos.d/epel-*
 RUN sed -i 's/metalink/#metalink/g' /etc/yum.repos.d/epel-*
 
-
-RUN cat /etc/yum.repos.d/epel-modular.repo
-
-RUN dnf clean all -y 
-RUN dnf makecache
+RUN cp /etc/yum/vars/releasever.bak /etc/yum/vars/releasever
 
 RUN dnf -v config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms 
 
