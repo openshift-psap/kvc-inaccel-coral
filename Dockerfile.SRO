@@ -11,15 +11,12 @@ RUN dnf repolist
 
 RUN dnf -v update --allowerasing --skip-broken -y
 
-#RUN dnf -v  -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+RUN dnf -v  -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
-RUN dnf -v config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms || true
-
-
-RUN dnf -v install -y ${REPO}/${XRT} ${REPO}/{AWS} || true
+RUN dnf -v config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms 
 
 
-RUN sleep infinity
+RUN dnf -v install -y ${REPO}/${XRT} ${REPO}/{AWS} 
 
 RUN dkms build -m xrt/2.6.0
 RUN dkms install -m xrt/2.6.0
