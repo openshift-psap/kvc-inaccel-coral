@@ -15,8 +15,8 @@ RUN dnf -v  -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest
 
 RUN dnf -v config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms 
 
-
-RUN dnf -v install -y ${REPO}/${XRT} ${REPO}/{AWS} 
+RUN dnf -v install -y ${REPO}/${XRT} 
+RUN dnf -v install -y ${REPO}/{AWS} 
 
 RUN dkms build -m xrt/2.6.0
 RUN dkms install -m xrt/2.6.0
