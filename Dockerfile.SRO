@@ -13,6 +13,8 @@ RUN dnf -v update --allowerasing --skip-broken -y
 
 RUN dnf -v  -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
+RUN sed -i 's/$releasever/8/g' /etc/yum.repos.d/epel-*
+
 RUN dnf -v config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms 
 
 RUN dnf -v install -y ${REPO}/${XRT} 
