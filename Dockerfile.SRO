@@ -6,6 +6,9 @@ ARG REPO=https://inaccel-amazon.s3.amazonaws.com/rhel
 ARG XRT=xrt_202010.2.6.0_8.3.2011-x86_64-xrt.rpm 
 ARG AWS=xrt_202010.2.6.0_8.3.2011-x86_64-aws.rpm
 
+RUN sleep infinity
+
+
 RUN dnf makecache
 RUN dnf repolist
 
@@ -19,6 +22,7 @@ RUN dnf -v config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms
 
 RUN dnf -v install -y ${REPO}/${XRT} 
 RUN dnf -v install -y ${REPO}/${AWS} 
+
 
 RUN dkms build -m xrt/2.6.0
 RUN dkms install -m xrt/2.6.0
