@@ -17,6 +17,9 @@ RUN sed -i 's/$releasever/8/g'      /etc/yum.repos.d/epel-*
 RUN sed -i 's/#baseurl/baseurl/g'   /etc/yum.repos.d/epel-*
 RUN sed -i 's/metalink/#metalink/g' /etc/yum.repos.d/epel-*
 
+
+RUN cat /etc/yum.repos.d/epel-modular.repo
+
 RUN dnf makecache
 
 RUN dnf -v config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms 
