@@ -3,25 +3,25 @@ ARG DRIVER_TOOLKIT=registry.access.redhat.com/ubi8:latest
 FROM $DRIVER_TOOLKIT
 
 ARG REPO=https://inaccel-amazon.s3.amazonaws.com/rhel
-ARG XRT=xrt_202010.2.6.0_8.3.2011-x86_64-xrt.rpm 
+ARG XRT=xrt_202010.2.6.0_8.3.2011-x86_64-xrt.rpm
 ARG AWS=xrt_202010.2.6.0_8.3.2011-x86_64-aws.rpm
 
-RUN sleep infinity
+#RUN sleep infinity
 
 
-RUN dnf makecache
-RUN dnf repolist
+#RUN dnf makecache
+#RUN dnf repolist
 
-RUN dnf -v update --allowerasing --skip-broken -y
+#RUN dnf -v update --allowerasing --skip-broken -y
 
-RUN rm /etc/yum/vars/releasever 
+RUN rm /etc/yum/vars/releasever
 
 RUN dnf -v  -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
-RUN dnf -v config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms 
+RUN dnf -v config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms
 
-RUN dnf -v install -y ${REPO}/${XRT} 
-RUN dnf -v install -y ${REPO}/${AWS} 
+RUN dnf -v install -y ${REPO}/${XRT}
+RUN dnf -v install -y ${REPO}/${AWS}
 
 
 RUN dkms build -m xrt/2.6.0
