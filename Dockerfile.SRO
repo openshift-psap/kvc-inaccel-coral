@@ -10,21 +10,21 @@ ARG AWS=xrt_202010.2.6.0_8.3.2011-x86_64-aws.rpm
 RUN rpm -ivh http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-8-2.el8.noarch.rpm
 RUN rpm -ivh http://mirror.centos.org/centos/8-stream/BaseOS/aarch64/os/Packages/centos-stream-repos-8-2.el8.noarch.rpm
 
+RUN dnf config-manager --set-enabled powertools
+
 RUN rm /etc/yum/vars/releasever
 
-RUN dnf -v  -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+RUN dnf -v  -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm jq
 
 # RUN dnf -v config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms
 
 RUN dnf -v install -y ${REPO}/${XRT}
 RUN dnf -v install -y ${REPO}/${AWS}
 
-
-RUN dkms build -m xrt/2.6.0
-RUN dkms install -m xrt/2.6.0
+RUN dkms build -m xrt/2.6.0 -k $(rpm -q --qf "%{VERSION}-%{RELEASE}.%{ARCH}"  kernel-core)
+RUN dkms install -m xrt/2.6.0 -k $(rpm -q --qf "%{VERSION}-%{RELEASE}.%{ARCH}"  kernel-core)
 
 RUN systemctl enable mpd
-
 
 RUN dnf -y install git
 RUN git clone https://github.com/aws/aws-fpga.git
