@@ -6,19 +6,15 @@ ARG REPO=https://inaccel-amazon.s3.amazonaws.com/rhel
 ARG XRT=xrt_202010.2.6.0_8.3.2011-x86_64-xrt.rpm
 ARG AWS=xrt_202010.2.6.0_8.3.2011-x86_64-aws.rpm
 
-#RUN sleep infinity
 
-
-#RUN dnf makecache
-#RUN dnf repolist
-
-#RUN dnf -v update --allowerasing --skip-broken -y
+RUN rpm -ivh http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-8-2.el8.noarch.rpm
+RUN rpm -ivh http://mirror.centos.org/centos/8-stream/BaseOS/aarch64/os/Packages/centos-stream-repos-8-2.el8.noarch.rpm
 
 RUN rm /etc/yum/vars/releasever
 
 RUN dnf -v  -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
-RUN dnf -v config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms
+# RUN dnf -v config-manager --set-enabled codeready-builder-for-rhel-8-x86_64-rpms
 
 RUN dnf -v install -y ${REPO}/${XRT}
 RUN dnf -v install -y ${REPO}/${AWS}
