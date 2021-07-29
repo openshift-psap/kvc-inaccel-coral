@@ -2,6 +2,8 @@ ARG DRIVER_TOOLKIT=registry.access.redhat.com/ubi8:latest
 
 FROM $DRIVER_TOOLKIT
 
+WORKDIR /root
+
 ARG REPO=https://inaccel-amazon.s3.amazonaws.com/rhel
 ARG XRT=xrt_202010.2.6.0_8.3.2011-x86_64-xrt.rpm
 ARG AWS=xrt_202010.2.6.0_8.3.2011-x86_64-aws.rpm
@@ -24,8 +26,17 @@ RUN dnf -v install -y ${REPO}/${AWS}
 RUN dkms build -m xrt/2.6.0 -k $(rpm -q --qf "%{VERSION}-%{RELEASE}.%{ARCH}"  kernel-core)
 RUN dkms install -m xrt/2.6.0 -k $(rpm -q --qf "%{VERSION}-%{RELEASE}.%{ARCH}"  kernel-core)
 
-RUN systemctl enable mpd
+RUN dkms build -m xrt-aws/2.6.0 -k $(rpm -q --qf "%{VERSION}-%{RELEASE}.%{ARCH}"  kernel-core)
+RUN dkms install -m xrt-aws/2.6.0 -k $(rpm -q --qf "%{VERSION}-%{RELEASE}.%{ARCH}"  kernel-core)
+
+
+RUN curl -sS https://setup.inaccel.com/repository | sh
+RUN dnf -y install inaccel-fpga
+
 
 RUN dnf -y install git
 RUN git clone https://github.com/aws/aws-fpga.git
 
+
+RUN systemctl enable kmods-via-containers@fpga-xrt-driver
+RUN systemctl enable mpd
